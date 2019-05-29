@@ -30,7 +30,13 @@ describe('routes.spec.js', () => {
           name: 'V1 350',
           color: 'Pirate Black',
           tts: '',
-        }));
+        }))
+        .then((res) => {
+          console.log('Response received')
+        })
+        .catch((err) => {
+          console.log('Error received')
+        })
     });
   });
 });
