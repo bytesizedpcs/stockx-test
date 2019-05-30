@@ -1,11 +1,13 @@
-const shoeId = 000;
-const invalidShoeId = 000;
+const validId = '001';
+const invalidId = '2293944';
+const invalidTypeId = 001;
 const validShoePostArray = ['000', '001', '002'];
 const invalidShoePostArray = [];
 
 module.exports = {
-  shoeId,
-  invalidShoeId,
+  validId,
+  invalidId,
+  invalidTypeId,
   validShoePostArray,
   invalidShoePostArray,
 };

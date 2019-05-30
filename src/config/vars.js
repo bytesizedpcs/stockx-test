@@ -4,13 +4,18 @@ require('dotenv-safe').load({
   path: path.join(__dirname, '../../.env.example'),
 });
 
+let port = '';
+
+if (process.env.NODE_ENV === 'test') { port = 8080}
+else { port = 3000 }
+
 module.exports = {
   env: process.env.NODE_ENV,
-  port: process.env.PORT,
-  logs: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
-  pgDatabase: process.env.PG_DB,
-  pgUsername: process.env.PG_USER,
-  pgPassword: process.env.PG_PASS,
-  pgHost: process.env.PG_HOST,
-  pgDialect: process.env.PG_DIALECT,
+  port,
+  logs: process.env.NODE_ENV === 'production' ? 'combined' : 'development',
+  pgDatabase: process.env.PGDATABASE,
+  pgUsername: process.env.PGUSER,
+  pgPassword: process.env.PGPASSWORD,
+  pgHost: process.env.PGHOST,
+  pgPort: process.env.PGPORT,
 }

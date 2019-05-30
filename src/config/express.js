@@ -5,7 +5,7 @@ const compress = require('compression')
 const methodOverride = require('method-override')
 const cors = require('cors')
 const helmet = require('helmet')
-const routes = require('../api/routes/v1');
+const routes = require('../api/routes');
 const { logs } = require('./vars');
 const error = require('../api/middlewares/errors');
 
@@ -24,7 +24,7 @@ app.use(helmet());
 
 app.use(cors());
 
-app.use('/v1', routes);
+app.use('/shoes', routes);
 
 app.use(error.converter);
 app.use(error.notFound);

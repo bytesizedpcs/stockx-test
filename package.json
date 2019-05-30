@@ -4,10 +4,10 @@
   "description": "StockX Assessment",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
-    "test": "nodemon --exec \"cross-env NODE_NV=test mocha --watch --timeout 5000 --recursive src/api/tests\"",
+    "dev": "nodemon NODE_ENV=development ./src/index.js",
+    "test": "nodemon --exec \"cross-env NODE_ENV=test mocha --watch --timeout 5000 --recursive src/api/tests\"",
     "test:unit": "cross-env NODE_ENV=test mocha src/api/tests/unit",
-    "start": "cross-env NODE_ENV=development pm2 start ./src/index.js"
+    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,8 @@
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
-    "pm2": "^3.5.1"
+    "pg": "^7.11.0",
+    "pm2": "^3.5.1",
+    "sequelize": "^5.8.7"
   }
 }

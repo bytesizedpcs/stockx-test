@@ -1,6 +1,6 @@
 const request = require('supertest');
 const httpStatus = require('http-status');
-const app = require('../../index');
+const app = require('../../config/express');
 const { 
   invalidShoeId, 
   shoeId, 
