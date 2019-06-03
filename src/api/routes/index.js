@@ -11,8 +11,8 @@ const {
 router.get('/', getAllShoes);
 router.get('/:id', getShoeById);
 router.post('/', createShoe);
-router.put('/:id&:size', addShoeSizeToArray);
-router.get('/sizes/:id', getShoeSizesArrayById)
+router.put('/:id&:tts', addShoeSizeToArray);
+router.get('/sizes/:id', getShoeSizesArrayById);
 
 router.use('/docs', express.static('docs'));
 
