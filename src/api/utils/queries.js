@@ -1,41 +1,58 @@
-const shoeGet = `
+const query = {};
+
+query.shoeGetAllQuery = `
   SELECT * 
   FROM shoe_table;
 `;
 
-const shoeGetId = `
-  SELECT (sum_shoe_sizes, size_amount) 
+query.shoeGetByIdQuery = `
+  SELECT * 
   FROM shoe_table 
   WHERE shoe_table.id=$1;
 `;
 
-const shoePost = `
-  INSERT INTO 
-  shoe_table (name, company, color, sum_shoe_sizes, size_amount)
-  VALUES ($1, $2, $3, $4, $5);
+query.insertFullShoeQuery = `
+  INSERT INTO
+  shoe_table(name, company, color, shoe_sizes)
+  VALUES ($1, $2, $3, ARRAY[$4]);
 `;
 
-const createTable = `
+query.insertPartialShoeQuery = `
+INSERT INTO 
+shoe_table (name, company, color)
+VALUES ($1, $2, $3);
+`;
+
+query.getShoeSizeArrayByIdQuery = `
+SELECT (shoe_sizes)
+FROM shoe_table
+WHERE shoe_table.id = $1;
+`;
+
+query.updateShoeSizeArrayByIdQuery = `
+UPDATE shoe_table
+SET shoe_sizes = shoe_sizes || ARRAY[$2]
+WHERE shoe_table.id = $1;
+`;
+
+query.createShoeTableQuery = `
   CREATE TABLE shoe_table (
     id    SERIAL PRIMARY KEY,
     name  VARCHAR(64) NOT NULL,
     company VARCHAR(64),
     color VARCHAR(64),
-    sum_shoe_sizes BIGINT,
-    size_amount INT
+    shoe_sizes INT[]
   );
 
   CREATE INDEX ON shoe_table (id);
 
   INSERT INTO 
-  shoe_table (name, company, color, sum_shoe_sizes, size_amount)
+  shoe_table (name, company, color, shoe_sizes)
   VALUES
-  ('350 Boost', 'Yeezy', 'Pirate Black', 250, 30), 
-  ('350 Boost', 'Yeezy', 'Turtle Dove', 250, 30),
-  ('350 Boost', 'Yeezy', 'Oxford Tan', 250, 30),
-  ('350 Boost', 'Yeezy', 'Moonrock', 250, 30);
+  ('350 Boost', 'Yeezy', 'Pirate Black', '{1, 2, 3, 4, 5}'), 
+  ('350 Boost', 'Yeezy', 'Turtle Dove', '{1, 2, 3, 4, 5}'),
+  ('350 Boost', 'Yeezy', 'Oxford Tan', '{1, 2, 3, 4, 5}'),
+  ('350 Boost', 'Yeezy', 'Moonrock', '{1, 2, 3, 4, 5}');
 `;
 
-module.exports = {
-  shoeGet, shoeGetId, shoePost
-}
+module.exports = query;

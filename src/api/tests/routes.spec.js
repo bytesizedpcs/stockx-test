@@ -10,10 +10,11 @@ const {
 
 describe('routes.spec.js', () => {
   describe('GET /shoe/ routes', () => {
-    it('should return all shoe objects', () => {
+    it('should return all shoe objects', (done) => {
       return request(app)
-        .get(`/shoe/`)
-        .expect(httpStatus.OK);
+        .get(`/shoe`)
+        .expect('Content-Type', /json/)
+        .expect(httpStatus.OK, done);
     });
 
     it('should return 404 when incorrect id is supplied', () => {
@@ -27,9 +28,8 @@ describe('routes.spec.js', () => {
         .get(`/shoe/${shoeId}`)
         .expect(JSON.stringify({
           company: 'Yeezy',
-          name: 'V1 350',
+          name: '350 Boost',
           color: 'Pirate Black',
-          tts: '',
         }))
         .then((res) => {
           console.log('Response received')
